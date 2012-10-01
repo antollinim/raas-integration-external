@@ -1,6 +1,7 @@
-raas-sample-external-ws
-=======================
+raas-integration-external
+=========================
 
-Sample external system exposed via WS to be used by raas-integration to consume data from
+Sample external system exposing data to be consumed by raas-integration
 
-Baseline taken from apache-camel-2.10.1\examples\camel-example-cxf-tomcat
+Reference: http://camel.apache.org/tutorial-jmsremoting.html
+
