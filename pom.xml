@@ -42,7 +42,7 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>org.apache.camel.example.cxf.CamelRouteClient</mainClass>
+                    <mainClass>com.plugtree.integration.external.jms.JMSProducer</mainClass>
                     <includePluginDependencies>false</includePluginDependencies>
                     <systemProperties>
                         <property>
@@ -52,10 +52,10 @@
                     </systemProperties>
                 </configuration>
             </plugin>
-			<plugin>
+			<!-- plugin>
 				<groupId>org.apache.camel</groupId>
 				<artifactId>camel-maven-plugin</artifactId>
-			</plugin>
+			</plugin -->
         </plugins>
     </build>
 
