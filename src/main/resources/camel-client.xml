@@ -29,7 +29,9 @@
 	
 	<!-- Camel JMSProducer to be able to send messages to a remote Active MQ server -->
 	<bean id="jms" class="org.apache.activemq.camel.component.ActiveMQComponent">
-		<property name="brokerURL" value="tcp://localhost:61610"/>
+		<!-- property name="brokerURL" value="tcp://localhost:61610"/ -->
+		<!-- property name="brokerURL" value="vm://localhost" / -->
+		<property name="brokerURL" value="tcp://lenovo:61616" />
 	</bean>
 
 </beans>
