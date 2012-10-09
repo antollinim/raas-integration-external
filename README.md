@@ -7,7 +7,7 @@ Reference: http://camel.apache.org/tutorial-jmsremoting.html
 
 http://hwellmann.blogspot.com.ar/2011/03/transparent-asynchronous-remoting-via.html
 http://camel.apache.org/manual/camel-manual-2.6.0.html
-
+http://camel.apache.org/pojo-messaging-example.html
 
 How to Run
 ==========

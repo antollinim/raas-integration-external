@@ -34,6 +34,7 @@
 		<property name="brokerURL" value="tcp://lenovo:61616" />
 	</bean>
 	
-	<bean class="com.plugtree.integration.external.jms.JMSClient"/>
+	<bean class="com.plugtree.integration.external.jms.JMSClient" />
+	<bean id="personService" class="com.plugtree.integration.external.api.PersonService"/>
 
 </beans>

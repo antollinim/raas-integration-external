@@ -42,8 +42,9 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.plugtree.integration.external.jms.JMSProducer</mainClass>
-                    <includePluginDependencies>false</includePluginDependencies>
+                    <!-- mainClass>com.plugtree.integration.external.jms.JMSProducer</mainClass -->
+                    <mainClass>com.plugtree.integration.external.jms.JMSClient</mainClass>
+                    <includePluginDependencies>true</includePluginDependencies>
                     <systemProperties>
                         <property>
                             <key>java.util.logging.config.file</key>
