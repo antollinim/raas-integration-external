@@ -6,9 +6,7 @@ import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.plugtree.integration.external.api.GoodbyeService;
-import com.plugtree.integration.external.api.HelloService;
-import com.plugtree.integration.external.api.Person;
+import com.plugtree.integration.model.Person;
 
 public class GreeterClient implements Runnable {  
     
@@ -20,9 +18,9 @@ public class GreeterClient implements Runnable {
     @Inject  
     private GoodbyeService goodbyeProxy;  
       
-    private Person donald = new Person("Donald", "Duck");  
-    private Person mickey = new Person("Mickey", "Mouse");  
-    private Person charlie = new Person("Charlie", "Brown");  
+    private Person donald = new Person().setName("Donald Duck");  
+    private Person mickey = new Person().setName("Mickey Mouse");  
+    private Person charlie = new Person().setName("Charlie Brown");  
   
     public void run() {  
         log.info("invoking greeter");  

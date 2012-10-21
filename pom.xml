@@ -1,118 +1,125 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one or more
-    contributor license agreements.  See the NOTICE file distributed with
-    this work for additional information regarding copyright ownership.
-    The ASF licenses this file to You under the Apache License, Version 2.0
-    (the "License"); you may not use this file except in compliance with
-    the License.  You may obtain a copy of the License at
+<!-- Licensed to the Apache Software Foundation (ASF) under one or more contributor 
+	license agreements. See the NOTICE file distributed with this work for additional 
+	information regarding copyright ownership. The ASF licenses this file to 
+	You under the Apache License, Version 2.0 (the "License"); you may not use 
+	this file except in compliance with the License. You may obtain a copy of 
+	the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required 
+	by applicable law or agreed to in writing, software distributed under the 
+	License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS 
+	OF ANY KIND, either express or implied. See the License for the specific 
+	language governing permissions and limitations under the License. -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
--->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-
-    <modelVersion>4.0.0</modelVersion>
+	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.plugtree.integration</groupId>
-    <artifactId>raas-integration-external</artifactId>
+	<artifactId>raas-integration-external</artifactId>
 	<version>1.0-SNAPSHOT</version>
-    <name>RAAS Integration :: External Client</name>
-    <description>Sample external system exposing data to be consumed by raas-integration</description>
-    <packaging>jar</packaging>
+	<name>RAAS Integration :: External Client</name>
+	<description>Sample external system exposing data to be consumed by raas-integration</description>
+	<packaging>jar</packaging>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>tomcat-maven-plugin</artifactId>
-                <version>1.1</version>
-                <configuration>
-                    <server>myTomcat</server>
-                    <url>${tomcat.url}</url>
-                    <path>/${project.build.finalName}</path>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <configuration>
-                    <!-- mainClass>com.plugtree.integration.external.jms.JMSProducer</mainClass -->
-                    <mainClass>com.plugtree.integration.external.jms.JMSClient</mainClass>
-                    <includePluginDependencies>true</includePluginDependencies>
-                    <systemProperties>
-                        <property>
-                            <key>java.util.logging.config.file</key>
-                            <value>logging.properties</value>
-                        </property>
-                    </systemProperties>
-                </configuration>
-            </plugin>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>tomcat-maven-plugin</artifactId>
+				<version>1.1</version>
+				<configuration>
+					<server>myTomcat</server>
+					<url>${tomcat.url}</url>
+					<path>/${project.build.finalName}</path>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<configuration>
+					<!-- mainClass>com.plugtree.integration.external.jms.JMSProducer</mainClass -->
+					<!-- mainClass>com.plugtree.integration.external.jms.JMSClient</mainClass -->
+					<mainClass>com.plugtree.integration.external.jms.App</mainClass>
+					<includePluginDependencies>true</includePluginDependencies>
+					<systemProperties>
+						<property>
+							<key>java.util.logging.config.file</key>
+							<value>logging.properties</value>
+						</property>
+					</systemProperties>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.camel</groupId>
 				<artifactId>camel-maven-plugin</artifactId>
+				<!-- optional, default value: org.apache.camel.spring.Main -->
+                <configuration>
+                    <!-- >mainClass>org.apache.camel.example.jmstofile.CamelJmsToFileExample</mainClass -->
+                    <!-- mainClass>org.apache.camel.example.jmstofile.JMSServer</mainClass -->
+                    <mainClass>com.plugtree.integration.external.jms.App</mainClass>
+                    <!--  fileApplicationContextUri>
+                        src/main/webapp/WEB-INF/camel*.xml;
+                        src/test/spring/test-context.xml
+                    </fileApplicationContextUri -->
+                    <!-- applicationContextUri>META-INF/spring/*.xml;YOUR_FILE_NAME_IN_THE_CLASS_PATH.xml</applicationContextUri -->
+                </configuration>
 			</plugin>
-        </plugins>
-    </build>
+		</plugins>
+	</build>
 
-    <dependencies>
+	<dependencies>
 
-        <!-- camel -->
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-core</artifactId>
+		<!-- camel -->
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-core</artifactId>
 			<version>2.10.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-spring</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-spring</artifactId>
 			<version>2.10.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-cxf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-cxf</artifactId>
 			<version>2.10.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-servlet</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-servlet</artifactId>
 			<version>2.10.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
 			<version>3.1.2.RELEASE</version>
-        </dependency>
-        
-        <!-- cxf -->
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-frontend-jaxws</artifactId>
-            <version>2.6.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-transports-http</artifactId>
-            <version>2.6.2</version>
-        </dependency>
+		</dependency>
 
-        <!-- logging -->
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
+		<!-- cxf -->
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxws</artifactId>
+			<version>2.6.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http</artifactId>
+			<version>2.6.2</version>
+		</dependency>
+
+		<!-- logging -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.7.1</version>
-        </dependency>
-		
+		</dependency>
+
 		<!-- JMS -->
 		<!-- required by both client and server -->
 		<dependency>
@@ -131,14 +138,31 @@
 			<version>5.6.0</version>
 		</dependency>
 
-		<!-- xbean is required for ActiveMQ broker configuration in the spring xml file -->
+		<!-- xbean is required for ActiveMQ broker configuration in the spring 
+			xml file -->
 		<dependency>
 			<groupId>org.apache.xbean</groupId>
 			<artifactId>xbean-spring</artifactId>
 			<version>3.11.1</version>
 		</dependency>
-		
-    </dependencies>
-    
+
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-jackson</artifactId>
+			<version>2.10.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-gson</artifactId>
+			<version>2.10.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-xstream</artifactId>
+			<version>2.10.1</version>
+		</dependency>
+
+	</dependencies>
+
 
 </project>

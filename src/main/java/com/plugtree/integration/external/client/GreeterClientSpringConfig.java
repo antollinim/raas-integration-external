@@ -13,8 +13,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.plugtree.integration.external.api.GoodbyeService;
-import com.plugtree.integration.external.api.HelloService;
 
 @Configuration  
 public class GreeterClientSpringConfig {  

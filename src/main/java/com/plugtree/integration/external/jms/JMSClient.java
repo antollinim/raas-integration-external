@@ -4,16 +4,20 @@ import org.apache.camel.Consume;
 import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
 
-import com.plugtree.integration.external.api.Person;
+import com.plugtree.integration.model.Person;
 
 public class JMSClient {
 
-    @Produce(uri = "activemq:personnel.records")
+    //@Produce(uri = "activemq:personnel.records")
+    @Produce(uri = "activemq:events.model")
     ProducerTemplate producer;
 
     @Consume(uri = "bean:personService?method=getPerson")
     public void onSendToQueue(Person person) {
-        producer.sendBody(person);
+        System.out.println("Sending...");
+        if(person != null){
+            producer.sendBody(person);
+        }
     }
     
     public JMSClient() {

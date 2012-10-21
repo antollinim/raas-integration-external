@@ -23,9 +23,9 @@
          http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
          http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
 	
-	<camel:camelContext id="camel-client">
+	<!-- camel:camelContext id="camel-client">
 		<camel:template id="camelTemplate"/>
-	</camel:camelContext>
+	</camel:camelContext -->
 	
 	<!-- Camel JMSProducer to be able to send messages to a remote Active MQ server -->
 	<bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">
@@ -34,6 +34,7 @@
 		<property name="brokerURL" value="tcp://lenovo:61616" />
 	</bean>
 	
-	<bean class="com.plugtree.integration.external.jms.JMSClient"/>
+	<!--  bean class="com.plugtree.integration.external.jms.JMSClient"/ -->
+	<bean id="personService" class="com.plugtree.integration.external.client.PersonService"/>
 
 </beans>
